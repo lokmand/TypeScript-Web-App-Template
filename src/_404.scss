@@ -8,4 +8,26 @@
 	img {
 		border: 5px #28262C solid;
 	}
+
+	.button {
+		width: 100px;
+		height: 25px;
+
+		border: 3px #444 solid;
+		border-radius: 5px;
+
+		margin: 10px auto;
+		padding: 5px;
+		padding-top: calc(12.5px - 0.5em);
+		background: url("img/git_bg.png");
+
+		a {
+			color: #333;
+			font-weight: bold;
+			text-decoration: none;
+
+			display: block;
+			margin-top: calc(12px - 0.5em);
+		}
+	}
 }

@@ -31,7 +31,7 @@ FROM nginx:1.15-alpine
 
 # We built the files in another container
 COPY --from=build-stage /app/dist/ /usr/share/nginx/html
-# COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose the app on port 80
 EXPOSE 80/tcp
