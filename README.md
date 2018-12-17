@@ -42,10 +42,10 @@ This image allows you to build, serve and test your code as you develop, regardl
 This image is for deploying your web app. It will build your image inside a container similar to the one outlined in `Dockerfile.development` and then copy the final build to an NGINX container (which is much smaller than the dev container). Changes made to your files on the host will *not* be reflectd inside the image you built (unless you rebuild it). The container will serve your app on port 80.
 
 ### Docker Compose
-In case you're a bit rusty on your Docker commands, or have no idea what Docker is but just want to be able to run this starter pack you can use the provided `docker-compose.yml` file. This file will create the above containers for you with the correct settings. Before proceeding, make sure you have docker-compose instealled. You can test this by running `docker-compose version`.
+In case you're a bit rusty on your Docker commands, or have no idea what Docker is but just want to be able to run this starter pack you can use the provided `docker-compose.yml` file. This file will create the above containers for you with the correct settings. Before proceeding, make sure you have docker-compose installed. You can test this by running `docker-compose version`.
 
 #### Using the Dev Environment
-To use the dev environment, run `docker-compose up -d ts-web-app-dev`. This will build the Docker image, and start it as a container. It will also mount the repository inside of the container so that any changes you make on the host machine will be reflected in the container. You should be able to navigate to `http://localhost:2222` and see the index page of your app.
+To use the dev environment, run `docker-compose up ts-web-app-dev`. This will build the Docker image, and start it as a container. It will also mount the repository inside of the container so that any changes you make on the host machine will be reflected in the container. You should be able to navigate to `http://localhost:2222` and see the index page of your app.
 
 #### Using the Prod Environment
 To see what your app will look like in a production container, run `docker-compose up -d ts-web-app`. This will build the Docker image, and start it as a container. You should be able to navigate to `http://localhost:80` and see the index page of your app.
