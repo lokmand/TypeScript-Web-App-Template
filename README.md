@@ -64,19 +64,19 @@ These are fairly optional as far as the web is concerned, but here's what they d
 ## browseconfig.xml
 This is Microsoft's special icon/tile dealio. The images specified in this file will show up in the link previews and pinned links in Microsoft operating systems.
 
-Read More here [ UPDATE: NEEDS A LINK ]
+Read More [here](https://technet.microsoft.com/en-us/windows/dn320426(v=vs.60))
 
 ## site.webmanifest
 This is Apple's special icon dealio. The images and text specified here will help Apple display a pinned webpage as an icon on iOS.
 
-Read More here [ UPDATE: NEEDS A LINK ]
+Read More [here](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 
 ## humans.txt
 This text is used to credit the author's of website and anything else you would want curious humans to know. There's not standard or anything, it's just a fun thing to have at the root of your server.
 
-Read More here [ UPDATE: NEEDS A LINK ]
+Read More [here](http://humanstxt.org)
 
 ## robots.txt
 Provides the rules for bots crawling your website. These can be ignored, obviously, but it's nice to help the spiders out anyways.
 
-Read More here [ UPDATE: NEEDS A LINK ]
+Read More [here](http://www.robotstxt.org)
