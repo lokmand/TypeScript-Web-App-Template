@@ -1,0 +1,35 @@
+# This is a conveninece file for those that understand Docker. If you don't 
+# grok Docker, follow the instructions in the README. 
+
+# You can use this image to develop your web app.
+# - Rebuilds the apps everytime you make a change to src/
+# - Serves the app at localhost:80 (on the container)
+
+## ALTERNATIVELY: You can download the image from my repository directly.
+## This means you can skip the install step. "It just werks!" :shrug:
+# FROM xvrqt/ts-web-app-dev
+
+# Use Dockerfile.production to build non-editable, much smaller image that users NGINX for serving.
+
+# Use Docker Compose to not have to worry about the the docker run commands
+
+# Using a NodeJS Image
+FROM node:11.4
+WORKDIR /app
+
+# Copy in the package.json to install all the dependencies
+COPY package*.json /app/
+# Apparently SASS contains some OS specific bindings
+RUN npm rebuild node-sass
+RUN npm install
+
+# Copy the rest of the files in to the app/ directory
+COPY ./ /app/
+
+# Expose the app on port 80
+EXPOSE 80/tcp
+
+# Build the app (transpile the .ts .scss in src/ to .js .css in dist/)
+RUN ["chmod", "+x", "/app/docker.dev.sh"]
+CMD ["bash", "docker.dev.sh"]
+

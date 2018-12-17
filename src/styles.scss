@@ -1,0 +1,55 @@
+@import "variables";
+@import "404";
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: $background-color;
+}
+
+.container {
+	width: 100%;
+	max-width: $container-max-width;
+	min-width: $container-min-width;
+
+	height: 100%;
+
+	margin: 0px auto;
+	padding: 25px 10px;
+	box-sizing: border-box; // Uses the padding in width calculations
+
+	color: $font-color;
+	text-align: center;
+
+	img {
+		width: $img-width;
+
+		margin: 0px auto;
+		display: block;
+		box-sizing: border-box; // Uses the border weight in width calculations
+
+		border: $img-border-width #FFF solid;
+		border-radius: 25%;
+	}
+
+	#text {
+		width: $img-width;
+		margin: 10px auto;
+
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+		h1 {
+			margin: 25px auto 0px auto;
+		}
+
+		hr {
+			border: 1px #B9DADA solid;
+			opacity: 0.5;
+		}
+
+		p {
+			margin: 10px auto 30px auto;
+			text-align: center;
+		}
+	}
+}

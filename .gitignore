@@ -1,0 +1,5 @@
+# Ignore Mac OS FS Cruft
+.DS_Store
+
+# Ignore Node Modules (install from package.json with 'npm install'
+node_modules/

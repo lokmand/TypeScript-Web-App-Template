@@ -1,0 +1,37 @@
+# This is a conveninece file for those that understand Docker. If you don't 
+# grok Docker, follow the instructions in the README.
+
+# You can use this image to host your web app.
+# - Serves the app at localhost:80 (on the container)
+
+# Use Dockerfile.development to build an image that allows for live editing.
+# Be warned, it's much bigger.
+
+# Use Docker Compose to not have to worry about the the docker run commands
+
+# Using a NodeJS Image
+FROM node:11.4 AS build-stage
+WORKDIR /app
+
+# Copy in the package.json to install all the dependencies
+COPY package*.json /app/
+# Apparently SASS contains some OS specific bindings
+RUN npm rebuild node-sass
+RUN npm install
+
+# Copy the rest of the files in to the app/ directory
+COPY ./ /app/
+
+# Build the app - transpiling the src/ to dist/
+RUN npm run build
+
+# Pull a new, NGINX image. This will serve our static site (instead of Express)
+# It's a much smaller image.
+FROM nginx:1.15-alpine
+
+# We built the files in another container
+COPY --from=build-stage /app/dist/ /usr/share/nginx/html
+# COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose the app on port 80
+EXPOSE 80/tcp
