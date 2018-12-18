@@ -1,9 +1,8 @@
+@import "reset";
 @import "variables";
 @import "404";
 
 body {
-	margin: 0;
-	padding: 0;
 	background-color: $background-color;
 }
 
