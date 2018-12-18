@@ -1,0 +1,19 @@
+# Ignore node_modules - we rebuild them inside the container
+# Some of the bindings are machine specific, you cannot just copy them over!
+node_modules
+
+# We can ignore our own Dockerfiles
+Dockerfile.*
+docker-compose.yml
+
+# We don't need to copy the README
+README.md
+*.md
+
+# Ignore Git
+.git
+.gitignore
+
+# Other
+.DS_Store
+.cache

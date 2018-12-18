@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile.development
     volumes:
-      - ./:/app/
+      - ./src:/app/src
     ports:
       - 2222:80
 

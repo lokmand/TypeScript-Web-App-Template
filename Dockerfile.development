@@ -19,9 +19,7 @@ WORKDIR /app
 
 # Copy in the package.json to install all the dependencies
 COPY package*.json /app/
-# Apparently SASS contains some OS specific bindings
-RUN npm rebuild node-sass
-RUN npm install
+RUN npm install --no-optional
 
 # Copy the rest of the files in to the app/ directory
 COPY ./ /app/

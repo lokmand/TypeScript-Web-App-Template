@@ -1,8 +1,8 @@
 {
   "name": "ts-web-starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A framework free starter to develop in TypeScript, compile, transpile SCSS and minify the result. Includes Dockerfile to user for development and deployment.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "build": "gulp",
