@@ -1,0 +1,21 @@
+stages:
+    - build
+
+image: node:11.4
+
+cache:
+  paths:
+    - node_modules/
+
+install_dependencies:
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+      
+build_dist:
+    stage: build
+    script: 
+        - npm run build
