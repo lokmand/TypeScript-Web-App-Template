@@ -1,6 +1,6 @@
-@import "reset";
-@import "variables";
-@import "404";
+@import "styles/reset";
+@import "styles/variables";
+@import "styles/404";
 
 body {
 	background-color: $background-color;
@@ -60,7 +60,7 @@ body {
 		padding: 5px;
 
 		border-radius: 10px;
-		background: url("img/git_bg.png");
+		// border-color: #DDD;
 
 		a {
 			text-decoration: none;
@@ -83,4 +83,13 @@ body {
 			margin-left: 15px;
 		}
 	}
+}
+
+/* Set the background based on WebP support */
+.no-webp .git {
+	background: url(img/git_bg.png);
+}
+
+.webp .git {
+	background: url(img/git_bg.webp);
 }

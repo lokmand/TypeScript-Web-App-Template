@@ -1,20 +1,20 @@
-var gulp = require("gulp");
+const gulp = require("gulp");
 
-var del = require("del");
-var watch = require("gulp-watch");
-var sourcemaps = require("gulp-sourcemaps");
+const del = require("del");
+const watch = require("gulp-watch");
+const sourcemaps = require("gulp-sourcemaps");
 
 /* Packages required for transpiling TypeScript */
-var ts = require("gulp-typescript");
-var ts_project = ts.createProject("tsconfig.json");
-var tslint = require("gulp-tslint");
-var uglify = require("gulp-uglify");
+const ts = require("gulp-typescript");
+const ts_project = ts.createProject("tsconfig.json");
+const tslint = require("gulp-tslint");
+const uglify = require("gulp-uglify");
 
 /* Packages required for transpiling styles */
-var sass = require("gulp-sass");
+const sass = require("gulp-sass");
 sass.compiler = require("node-sass");
-var concat = require('gulp-concat');
-var clean_css = require("gulp-clean-css");
+const concat = require('gulp-concat');
+const clean_css = require("gulp-clean-css");
 
 /* Convience Variables */
 let dirs = {
@@ -26,7 +26,7 @@ let dirs = {
     fav_icon: "/icons/favicon.ico",     /* Where the favicon.ico lives */
     icons_dist: "dist/icons",
 
-    img_src: "src/img/**/*.+(png|jpg|gif)",
+    img_src: "src/img/**/*.+(png|jpg|gif|svg|webp)",
     img_dist: "dist/img",
 
 	ts_src: "src/**/*.ts",
@@ -55,7 +55,7 @@ gulp.task("copy:manifest", () => {
     return gulp.src([
     		dirs.src + "/icons/site.webmanifest"
     	])
-        .pipe(gulp.dest(dirs.dist));
+        .pipe(gulp.dest(dirs.icons_dist));
 });
 
 /* Copies the browserconfig.xml file to dist/ */
@@ -162,7 +162,7 @@ gulp.task("transpile:ts", () => {
 });
 
 /* Lints, builds, minifies and copies the TypeScript files to dist/ */
-gulp.task("typescript", gulp.series("clean:js", "lint:ts", "transpile:ts"));
+gulp.task("typescript", gulp.series("clean:js", "transpile:ts", "lint:ts"));
 
 /************
  *  Styles  *
@@ -195,16 +195,16 @@ gulp.task("default", gulp.parallel("build"));
 
 /* Watches for changes and then rebuilds */
 gulp.task("watch", () => {
-	gulp.watch(dirs.html_src, gulp.series("html"));
-	gulp.watch(dirs.scss_src, gulp.series("styles"));
-	gulp.watch(dirs.ts_src, gulp.series("typescript"));
+	watch(dirs.html_src, gulp.series("html"));
+	watch(dirs.scss_src, gulp.series("styles"));
+	watch(dirs.ts_src, gulp.series("typescript"));
 
 
-    gulp.watch(dirs.src + "/site.webmanifest", gulp.series("copy:manifest"));
-    gulp.watch(dirs.src + "/browserconfig.xml", gulp.series("copy:browserconfig"));
-    gulp.watch(dirs.src + "/robots.txt", gulp.series("copy:robots"));
-    gulp.watch(dirs.src + "/humans.txt", gulp.series("copy:humans"));
-    gulp.watch(dirs.src + dirs.fav_icon, gulp.series("copy:ico"));
-    gulp.watch(dirs.icons_src, gulp.series("copy:icons"));
-    gulp.watch(dirs.img_src, gulp.series("copy:images"));
+    watch(dirs.src + "/icons/site.webmanifest", gulp.series("copy:manifest"));
+    watch(dirs.src + "/browserconfig.xml", gulp.series("copy:browserconfig"));
+    watch(dirs.src + "/robots.txt", gulp.series("copy:robots"));
+    watch(dirs.src + "/humans.txt", gulp.series("copy:humans"));
+    watch(dirs.src + dirs.fav_icon, gulp.series("copy:ico"));
+    watch(dirs.icons_src, gulp.series("copy:icons"));
+    watch(dirs.img_src, gulp.series("copy:images"));
 });

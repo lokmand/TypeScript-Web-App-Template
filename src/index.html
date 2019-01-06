@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 
   <head>
     <!-- Title and Description -->
@@ -27,13 +27,22 @@
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
+    <!-- Removes the "no-js" element from the <html> tag if JS is present. -->
+    <script>
+      document.documentElement.classList.remove("no-js");
+    </script>
+
     <!-- Our single style sheet -->
     <link rel="stylesheet" href="styles.css">
   </head>
 
   <body>
     <div class="container">
-      <img src="img/amy.png" />
+      <picture>
+        <source srcset="img/amy.webp 1x" type="image/webp" />
+        <source srcset="img/amy.png 1x"  type="image/png" />
+        <img src="img/amy.png" class="logo" alt="A portrait of the maintaner of Typescript Web App Starter" />
+      </picture>
       <div id="text">
         <h1>Hello, World!</h1>
         <hr />
@@ -43,14 +52,22 @@
       <!-- Links to the Git Repository -->
       <div class="git">
         <a href="https://git.xvrqt.com/amy/typescript-web-app-template">
-          <img src="img/gitlab.png" />
+          <picture>
+            <source srcset="img/gitlab.webp 1x" type="image/webp" />
+            <source srcset="img/gitlab.png 1x"  type="image/png" />
+            <img src="img/gitlab.png" class="logo" alt="GitLab Logo" />
+          </picture>
           <h3>GitLab</h3>
         </a>
       </div>
 
       <div class="git">
         <a href="https://github.com/xvrqt/TypeScript-Web-App-Template">
-          <img src="img/github.png" />
+          <picture>
+            <source srcset="img/github.webp 1x" type="image/webp" />
+            <source srcset="img/github.png 1x"  type="image/png" />
+            <img src="img/github.png" class="logo" alt="GitHub Logo" />
+          </picture>
           <h3>GitHub</h3>
         </a>
       </div>

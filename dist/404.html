@@ -10,7 +10,11 @@
 </head>
 <body id="not_found">
     <div class="container">
-      <img src="img/404.png" />
+      <picture>
+        <source srcset="img/404.webp 1x" type="image/webp" />
+        <source srcset="img/404.png 1x"  type="image/png" />
+        <img src="img/404.png" class="logo" alt="A demonic and most displeased portrait of the maintaner." />
+      </picture>
       <div id="text">
         <h1>Page Not Found!</h1>
         <hr />
