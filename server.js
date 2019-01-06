@@ -53,13 +53,7 @@ process.argv.forEach((val, idx) => {
 
 /* Express app setup */
 const app = express();
-app.use(express.static('dist'));
-
-/* Build the app */
-if(shell.exec('gulp build').code !== 0) {
-	shell.echo('Error: Failed to build your web app.');
-	shell.exit(1);
-}
+app.use(express.static(__dirname + '/dist'));
 
 /* Watch the files for changes */
 var gulp_watch = shell.exec('gulp watch', {async:true});
