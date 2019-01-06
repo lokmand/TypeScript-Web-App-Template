@@ -3,3 +3,6 @@
 
 # Ignore Node Modules (install from package.json with 'npm install'
 node_modules/
+
+# Ignore the distribution directory
+dist/
