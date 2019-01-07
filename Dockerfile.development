@@ -24,7 +24,7 @@ RUN npm install --no-optional
 # Copy the rest of the files in to the app/ directory
 COPY ./ /app/
 
-# Expose the app on port 8080
+# Expose the app on port 80
 EXPOSE 80/tcp
 
 # Build the app (transpile the .ts .scss in src/ to .js .css in dist/)
