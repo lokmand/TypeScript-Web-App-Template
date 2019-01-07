@@ -19,6 +19,8 @@ const through2 = require("through2");
 
 /* Packages for modifying the HTML */
 const inject = require('gulp-inject');
+const htmlmin = require('gulp-htmlmin');
+const removeHtmlComments = require('gulp-remove-html-comments');
 
 /* Convience Variables */
 let dirs = {
@@ -132,6 +134,8 @@ gulp.task("copy:html",() => {
     return gulp.src([
     		dirs.html_src
     	])
+        .pipe(removeHtmlComments())
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(dirs.dist));
 });
 
