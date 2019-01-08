@@ -29,3 +29,15 @@ deploy_staging:
     url: https://stg.web-starter.xvrqt.com
   only:
   - master
+  
+deploy_production:
+  stage: deploy
+  script:
+    - echo "Deploying to production server"
+    - scp -r dist/* root@static-01:/var/www/web-starter
+  environment:
+    name: production
+    url: https://web-starter.xvrqt.com
+  when: manual
+  only:
+  - master
