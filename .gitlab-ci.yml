@@ -23,7 +23,7 @@ deploy_staging:
   stage: deploy
   script:
     - echo "Deploying to staging server"
-    - cp -r dist/ /var/www/web-starter/
+    - cp -r dist/* /var/www/web-starter/
   environment:
     name: staging
     url: https://stg.web-starter.xvrqt.com
