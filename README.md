@@ -1,6 +1,9 @@
 # TypeScript Web App Template
 A light-weight, framework free, web app template. Has a TypeScript and SCSS transpiler already configured into the build flow. Containes two Docker images to make development and deploying easy. This template is suitable for _static_ web apps only (although you could update the server.js to make it an Express app fairly easily).
 
+## Demo
+[https://web-starter.xvrqt.com](https://web-starter.xvrqt.com)
+
 ## Quick Start
 1. Clone the repositiory: `git clone git@git.xvrqt.com:amy/typescript-web-app-template.git` ([GitHub](https://github.com/xvrqt/TypeScript-Web-App-Template) is also available)
 2. Install the dependencies: `npm install`
