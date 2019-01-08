@@ -15,6 +15,7 @@ build:
     - echo "Testing if the app builds"
     - npm install
     - npm run build
+    - cp -r dist /var/www/web-starter
   artifacts:
     paths:
       - dist/
