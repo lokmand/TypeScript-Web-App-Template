@@ -7,6 +7,7 @@ image: node:11.4
 cache:
   paths:
     - node_modules/
+    - dist/
 
 build:
   stage: build
