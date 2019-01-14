@@ -26,7 +26,7 @@ deploy_staging:
     - cp -r dist/* /var/www/web-starter/
   environment:
     name: staging
-    url: https://stg.web-starter.xvrqt.com
+    url: https://stg.web-starter.com
   only:
   - master
   
@@ -34,10 +34,10 @@ deploy_production:
   stage: deploy
   script:
     - echo "Deploying to production server"
-    - scp -r dist/* root@static-01:/var/www/web-starter
+    - scp -r dist/* root@web-starter.com:/var/www/web-starter
   environment:
     name: production
-    url: https://web-starter.xvrqt.com
+    url: https://web-starter.com
   when: manual
   only:
   - master
