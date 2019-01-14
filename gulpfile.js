@@ -172,15 +172,15 @@ gulp.task("clean:js:dev", () => {
 });
 
 /* Checks your code for neatness. See tslint.json for options. */ 
-gulp.task("lint:ts", (done) =>
-    gulp.src([
+gulp.task("lint:ts", () => {
+    return gulp.src([
         	dirs.ts_src
     	])
         .pipe(tslint({
             formatter: "verbose"
         }))
         .pipe(tslint.report())
-);
+});
 
 /* Transpiles the TypeScript to ES6, minifies it, and moves it to dist/ */
 gulp.task("transpile:ts", () => {
@@ -189,7 +189,7 @@ gulp.task("transpile:ts", () => {
         dirs.ts_src
    	])
    	.pipe(sourcemaps.init())
-  	.pipe(ts_project(ts.reporter.fullReporter()))
+  	.pipe(ts_project(ts.reporter.fullReporter()));
 
   	/* Minify the code */
     return js_code.js
@@ -198,8 +198,28 @@ gulp.task("transpile:ts", () => {
         .pipe(gulp.dest(dirs.dist));
 });
 
+/* Returns an error code if it fails to build. */
+gulp.task("transpile:ts:build", () => {
+    /* Transpile the code */
+    var js_code = gulp.src([
+        dirs.ts_src
+    ])
+    .pipe(sourcemaps.init())
+    .pipe(ts_project(ts.reporter.fullReporter()))
+    .on("error", (err) => {
+        console.log(err.toString());
+        process.exit(1);
+    });
+
+    /* Minify the code */
+    return js_code.js
+        .pipe(uglify())
+        .pipe(sourcemaps.write(dirs.maps))
+        .pipe(gulp.dest(dirs.dist));
+});
+
 /* Lints, builds, minifies and copies the TypeScript files to dist/ */
-gulp.task("typescript", gulp.series("clean:js", "transpile:ts"));
+gulp.task("typescript:build", gulp.series("clean:js", "transpile:ts:build"));
 gulp.task("typescript:dev", gulp.series("clean:js:dev", "transpile:ts", "lint:ts"));
 
 /************
@@ -214,11 +234,29 @@ gulp.task("clean:css", () => {
 /* Convert all the SCSS files to CSS, concatenate them into styles.css and 
  * minify that files.
 */
+gulp.task("transpile:scss:build", () => {
+  return gulp.src(dirs.scss_src)
+    .pipe(sourcemaps.init())
+    .pipe(sass().on("error", (err) => {
+        console.log(err.toString());
+        process.exit(1);
+    }))
+    .pipe(clean_css())
+    .pipe(sourcemaps.write(dirs.maps))
+    .pipe(through2.obj( function( file, enc, cb ) { // Apparently it's a "feature" in Gulp 4 to not update the file modified time. This does that.
+        var date = new Date();
+        file.stat.atime = date;
+        file.stat.mtime = date;
+        cb(null, file);
+    }))
+    .pipe(gulp.dest(dirs.dist));
+});
+
+/* Doesn't exit on error - used in the watch task. */
 gulp.task("transpile:scss", () => {
   return gulp.src(dirs.scss_src)
     .pipe(sourcemaps.init())
     .pipe(sass().on("error", sass.logError))
-    // .pipe(concat("styles.css"))
     .pipe(clean_css())
     .pipe(sourcemaps.write(dirs.maps))
     .pipe(through2.obj( function( file, enc, cb ) { // Apparently it's a "feature" in Gulp 4 to not update the file modified time. This does that.
@@ -231,11 +269,11 @@ gulp.task("transpile:scss", () => {
 });
 
 gulp.task("styles", gulp.series("clean:css", "transpile:scss"));
-
+gulp.task("styles:build", gulp.series("clean:css", "transpile:scss:build"));
 
 /* Lints the program, builds, minifies and copies it to /dist */
-gulp.task("build", gulp.parallel("html", "typescript", "styles", "copy:misc"));
-gulp.task("build:dev", gulp.series("copy:livereload", gulp.parallel("html:dev", "typescript:dev", "styles", "copy:misc")));
+gulp.task("build", gulp.parallel("html", "typescript:build", "styles:build", "copy:misc"));
+gulp.task("build:dev", gulp.series("copy:livereload", gulp.parallel("html:dev", "typescript:dev", "styles:build", "copy:misc")));
 gulp.task("default", gulp.parallel("build"));
 
 /* Watches for changes and then rebuilds */
