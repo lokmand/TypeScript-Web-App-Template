@@ -11,8 +11,9 @@ cache:
 
 build:
   stage: build
+  tags:
+    - docker
   script:
-    - echo "Testing if the app builds"
     - npm install
     - npm run build
   artifacts:
@@ -21,23 +22,32 @@ build:
       
 deploy_staging:
   stage: deploy
+  tags:
+    - shell
   script:
-    - echo "Deploying to staging server"
+    - mkdir -p /var/www/web-starter
+    - mkdir -p /etc/nginx/sites-enabled
+    - cp nginx.dev.conf /etc/nginx/sites-enabled/web-starter
     - cp -r dist/* /var/www/web-starter/
+    - sudo nginx -t
+    - sudo /etc/init.d/nginx reload
   environment:
     name: staging
-    url: https://stg.web-starter.com
+    url: https://web-starter.stg.xvrqt.com
   only:
   - master
   
 deploy_production:
   stage: deploy
+  tags:
+    - shell
   script:
-    - echo "Deploying to production server"
-    - scp -r dist/* root@web-starter.com:/var/www/web-starter
+    - scp -p nginx.prod.conf root@static-01:/etc/nginx/sites-enabled/web-starter
+    - scp -pr dist root@static-01:/var/www/web-starter
+    - ssh root@static-01 'nginx -t && service nginx reload'
   environment:
     name: production
-    url: https://web-starter.com
+    url: https://web-starter.xvrqt.com
   when: manual
   only:
-  - master
+    - tags

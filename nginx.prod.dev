@@ -1,0 +1,27 @@
+# First server upgrades all HTTP traffic to HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+
+    # HTTPS Always
+    server_name web-starter.xvrqt.com;
+    return 301 https://web-starter.xvrqt.com$request_uri;
+}
+
+# Serves the HTTPS traffic
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+    server_name web-starter.xvrqt.com;
+    root /var/www/web-starter;
+    index index.html;
+
+    error_page  404 404.html;
+
+    location / {
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files $uri $uri/ =404;
+    }
+}
