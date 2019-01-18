@@ -278,15 +278,15 @@ gulp.task("default", gulp.parallel("build"));
 
 /* Watches for changes and then rebuilds */
 gulp.task("watch", gulp.series("build:dev", () => {
-        watch(dirs.html_src, gulp.series("html:dev"));
-        watch(dirs.scss_src, gulp.series("styles"));
-        watch(dirs.ts_src, gulp.series("typescript:dev"));
+    watch(dirs.html_src, gulp.series("html:dev"));
+    watch(dirs.scss_src, gulp.series("styles"));
+    watch(dirs.ts_src, gulp.series("typescript:dev"));
 
-        watch(dirs.src + "/icons/site.webmanifest", gulp.series("copy:manifest"));
-        watch(dirs.src + "/browserconfig.xml", gulp.series("copy:browserconfig"));
-        watch(dirs.src + "/robots.txt", gulp.series("copy:robots"));
-        watch(dirs.src + "/humans.txt", gulp.series("copy:humans"));
-        watch(dirs.src + dirs.fav_icon, gulp.series("copy:ico"));
-        watch(dirs.icons_src, gulp.series("copy:icons"));
-        watch(dirs.img_src, gulp.series("copy:images"));
+    watch(dirs.src + "/icons/site.webmanifest", gulp.series("copy:manifest"));
+    watch(dirs.src + "/browserconfig.xml", gulp.series("copy:browserconfig"));
+    watch(dirs.src + "/robots.txt", gulp.series("copy:robots"));
+    watch(dirs.src + "/humans.txt", gulp.series("copy:humans"));
+    watch(dirs.src + dirs.fav_icon, gulp.series("copy:ico"));
+    watch(dirs.icons_src, gulp.series("copy:icons"));
+    watch(dirs.img_src, gulp.series("copy:images"));
 }));
