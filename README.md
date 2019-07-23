@@ -1,6 +1,9 @@
 # TypeScript Web App Template
 A light-weight, framework free, web app template. Has a TypeScript and SCSS transpiler already configured into the build flow. Containes two Docker images to make development and deploying easy. This template is suitable for _static_ web apps only (although you could update the server.js to make it an Express app fairly easily).
 
+**DEPRECATED**
+This project is no longer supported, but is left here for anyone that may find it useful. If you like the functionality, you should checkout: [Consentacles](https://git.xvrqt.com/amy/consentacles) which has all of the same features and more.
+
 ## Demo
 [https://web-starter.xvrqt.com](https://web-starter.xvrqt.com)
 
